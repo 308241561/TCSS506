@@ -1,26 +1,52 @@
-{% extends "base.html" %}
-{% set active_page = 'home' %}
-{% block title %} Home {% endblock %}
-{% block content %}
+{% extends "base.html" %} {% set active_page = 'home' %} {% block title %} Home
+{% endblock %} {% block content %}
 <table class="table table-striped">
+  <!-- below is copied from login.html  -->
+  <div class="w-50">
+    <form method="post">
+      {{ form.csrf_token }}
+      <div class="mb-3">
+        <fieldset class="form-field">
+          {{ form.date.label(class="form-label") }}
+          {{form.date(class="form-control") }} {% if form.date.errors %}
+          <ul class="errors">
+            {% for error in form.date.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </fieldset>
+      </div>
+
+      <div class="mb-3">
+        <fieldset class="form-field">
+          {{ form.searchNum.label(class="form-label") }} {{
+          form.searchNum(class="form-control") }}
+        </fieldset>
+      </div>
+      {{ form.submit(class="btn btn-primary") }}
+    </form>
+  </div>
+  <!-- The above is copied from login.html -->
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
-      <th scope="col">Rating</th>
+      <th scope="col">Year</th>
     </tr>
   </thead>
   <tbody>
+    {% for business in myData %}
+    <tr>
+      <td class="align-middle">{{ loop.index0 +1 }}</td>
+      <td class="align-middle">
+        <img src= {{ business['thumbnail'] }} class="img-thumbnail"
+        style="max-height:50px;max-width:50px;"> {{business['text']}}
+      </td>
+      <td class="align-middle">{{ business['year']}}</td>
+    </tr>
 
-		{% for business in myData %}
-			<tr>
-				<td class="align-middle">{{ loop.index0 +1 }}</td>
-				<td class="align-middle"> <img src= {{ business['image_url'] }} class="img-thumbnail" style="max-height:50px;max-width:50px;"> {{business['name']}}</td>			
-				<td class="align-middle">{{ business['rating']}}</td>			
-			</tr>
-		
-        {% endfor %}
-
+    {% endfor %}
   </tbody>
 </table>
- {% endblock %}
+{% endblock %}

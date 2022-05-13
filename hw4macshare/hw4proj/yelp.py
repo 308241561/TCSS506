@@ -16,3 +16,5 @@ def find_coffee():
 	sortedbyRating=sorted(data["businesses"], key=lambda i: i['rating'], reverse=True)
 	replaceEmptyImages(sortedbyRating,"localhost")
 	return sortedbyRating
+
+# print(find_coffee())
