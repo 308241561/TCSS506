@@ -19,7 +19,8 @@ def findBirths(monthDay,year,size=10):
         item['thumbnail']="localhost"
         if "thumbnail" in item['pages'][0]:
             item['thumbnail']=item['pages'][0]["thumbnail"]["source"]
+            x = 0
     return sortedbyClosestYear
 
 
-# print(findBirths('01/01', '2000', 10))
+print(findBirths('01/01', '2000', 10))
